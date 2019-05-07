@@ -4,7 +4,7 @@ import numpy as np
 
 class PerformanceSpace:
     """
-    This class represents the tuning performance space.
+    The tuning performance space.
     """
 
     def add_element(self, element):
@@ -44,14 +44,21 @@ class PerformanceSpace:
     
     def optimum(self):
         """
-        Return the value of the optimal performance.
+        Return the optimal performance.
         """
 
         return self.best
+
+    def bottom(self):
+        """
+        Return the worst performance.
+        """
+
+        return self.worst
     
     def histogram(self, nbins=10):
         """
-        Returns the performance histogram of the space.
+        Return the performance histogram of the space.
         """
 
         return np.histogram(self.values, bins=nbins)
