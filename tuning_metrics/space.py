@@ -62,6 +62,20 @@ class PerformanceSpace:
         """
 
         return np.histogram(self.values, bins=nbins)
+
+    def average(self):
+        """
+        Return the average performance in the space.
+        """
+
+        return np.average(self.values)
+
+    def median(self):
+        """
+        Return the median performance in the space.
+        """
+
+        return np.median(self.values)
     
     def __init__(self, ascending_metric=True, name=""):
         self.ascending_metric = ascending_metric
