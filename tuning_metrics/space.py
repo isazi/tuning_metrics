@@ -12,7 +12,7 @@ class PerformanceSpace:
         Add one element to the performance space.
         """
 
-        self.values.append(element)
+        np.append(self.values, element)
         if self.ascending_metric:
             # The performance metric is ascending (higher is better)
             if element > self.best:
@@ -31,7 +31,7 @@ class PerformanceSpace:
         Clear the space removing all previously added elements.
         """
 
-        self.values.clear()
+        self.values = np.array()
         self.best = 0.0
         self.worst = 0.0
     
@@ -66,6 +66,6 @@ class PerformanceSpace:
     def __init__(self, ascending_metric=True, name=""):
         self.ascending_metric = ascending_metric
         self.name = name
-        self.values = []
+        self.values = np.array()
         self.best = 0.0
         self.worst = 0.0
