@@ -13,18 +13,6 @@ class PerformanceSpace:
         """
 
         self.values = numpy.append(self.values, element)
-        if self.ascending_metric:
-            # The performance metric is ascending (higher is better)
-            if element >= self.best:
-                self.best = element
-            if element <= self.worst:
-                self.worst = element
-        else:
-            # The performance metric is descending (lower is better)
-            if element <= self.best:
-                self.best = element
-            if element >= self.worst:
-                self.worst = element
 
     def clear(self):
         """
@@ -51,14 +39,20 @@ class PerformanceSpace:
         Return the optimal performance.
         """
 
-        return self.best
+        if self.ascending_metric:
+            return self.values.max()
+        else:
+            return self.values.min()
 
     def bottom(self):
         """
         Return the worst performance.
         """
 
-        return self.worst
+        if self.ascending_metric:
+            return self.values.min()
+        else:
+            return self.values.max()
     
     def histogram(self, nbins=10):
         """
@@ -95,8 +89,6 @@ class PerformanceSpace:
         self.ascending_metric = ascending_metric
         self.name = name
         self.values = numpy.empty([0], dtype=numpy.float64)
-        self.best = 0.0
-        self.worst = 0.0
         if ascending_metric:
             self.best = numpy.finfo(numpy.float64).min
             self.worst = numpy.finfo(numpy.float64).max
