@@ -25,7 +25,7 @@ class PerformanceSpace:
                 self.best = element
             if element >= self.worst:
                 self.worst = element
-    
+
     def clear(self):
         """
         Clear the space removing all previously added elements.
@@ -80,6 +80,13 @@ class PerformanceSpace:
         """
 
         return numpy.median(self.values)
+
+    def standard_deviation(self):
+        """
+        Return the standard deviation of the performance space.
+        """
+
+        return numpy.std(self.values)
     
     def __init__(self, ascending_metric=True, name=""):
         self.ascending_metric = ascending_metric
