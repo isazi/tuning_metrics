@@ -1,5 +1,5 @@
 
-import numpy as np
+import numpy
 
 
 class PerformanceSpace:
@@ -12,18 +12,18 @@ class PerformanceSpace:
         Add one element to the performance space.
         """
 
-        np.append(self.values, element)
+        self.values = numpy.append(self.values, element)
         if self.ascending_metric:
             # The performance metric is ascending (higher is better)
-            if element > self.best:
+            if element >= self.best:
                 self.best = element
-            if element < self.worst:
+            if element <= self.worst:
                 self.worst = element
         else:
             # The performance metric is descending (lower is better)
-            if element < self.best:
+            if element <= self.best:
                 self.best = element
-            if element > self.worst:
+            if element >= self.worst:
                 self.worst = element
     
     def clear(self):
@@ -31,9 +31,13 @@ class PerformanceSpace:
         Clear the space removing all previously added elements.
         """
 
-        self.values = np.empty([1])
-        self.best = 0.0
-        self.worst = 0.0
+        self.values = numpy.empty([0], dtype=numpy.float64)
+        if self.ascending_metric:
+            self.best = numpy.finfo(numpy.float64).min
+            self.worst = numpy.finfo(numpy.float64).max
+        else:
+            self.best = numpy.finfo(numpy.float64).max
+            self.worst = numpy.finfo(numpy.float64).min
     
     def size(self):
         """
@@ -42,7 +46,7 @@ class PerformanceSpace:
 
         return len(self.values)
     
-    def optimum(self):
+    def top(self):
         """
         Return the optimal performance.
         """
@@ -61,25 +65,31 @@ class PerformanceSpace:
         Return the performance histogram of the space.
         """
 
-        return np.histogram(self.values, bins=nbins)
+        return numpy.histogram(self.values, bins=nbins)
 
     def average(self):
         """
         Return the average performance in the space.
         """
 
-        return np.average(self.values)
+        return numpy.average(self.values)
 
     def median(self):
         """
         Return the median performance in the space.
         """
 
-        return np.median(self.values)
+        return numpy.median(self.values)
     
     def __init__(self, ascending_metric=True, name=""):
         self.ascending_metric = ascending_metric
         self.name = name
-        self.values = np.empty([1])
+        self.values = numpy.empty([0], dtype=numpy.float64)
         self.best = 0.0
         self.worst = 0.0
+        if ascending_metric:
+            self.best = numpy.finfo(numpy.float64).min
+            self.worst = numpy.finfo(numpy.float64).max
+        else:
+            self.best = numpy.finfo(numpy.float64).max
+            self.worst = numpy.finfo(numpy.float64).min
