@@ -20,4 +20,4 @@ def tuning_score_size(performance_space, peak):
     Computes TS_s, the tuning score based on the size of the performance space compared to the achievable performance.
     """
 
-    return math.sqrt(performance_space.optimum() / peak)
+    return math.sqrt(performance_space.top() / peak)
