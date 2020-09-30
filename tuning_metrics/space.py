@@ -31,7 +31,7 @@ class PerformanceSpace:
         Clear the space removing all previously added elements.
         """
 
-        self.values = np.array()
+        self.values = np.empty([1])
         self.best = 0.0
         self.worst = 0.0
     
@@ -80,6 +80,6 @@ class PerformanceSpace:
     def __init__(self, ascending_metric=True, name=""):
         self.ascending_metric = ascending_metric
         self.name = name
-        self.values = np.array()
+        self.values = np.empty([1])
         self.best = 0.0
         self.worst = 0.0
