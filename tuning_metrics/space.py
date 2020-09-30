@@ -65,7 +65,10 @@ class PerformanceSpace:
         Return the performance histogram of the space.
         """
 
-        return numpy.histogram(self.values, bins=nbins)
+        if self.ascending_metric:
+            return numpy.histogram(self.values, bins=nbins)[0]
+        else:
+            return numpy.flip(numpy.histogram(self.values, bins=nbins)[0])
 
     def average(self):
         """
