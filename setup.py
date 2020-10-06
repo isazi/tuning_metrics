@@ -8,9 +8,10 @@ def long_description():
 
 setuptools.setup(
     name="tuning_metrics",
-    version="0.1.0",
+    version="0.1.1",
     author="Alessio Sclocco",
     author_email="alessio@sclocco.eu",
+    license="Apache 2.0",
     description="Library to compute auto-tuning and performance metrics.",
     long_description=long_description(),
     long_description_content_type="text/markdown",
