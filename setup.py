@@ -8,7 +8,7 @@ def long_description():
 
 setuptools.setup(
     name="tuning_metrics",
-    version="0.1.1",
+    version="0.1.2",
     author="Alessio Sclocco",
     author_email="alessio@sclocco.eu",
     license="Apache 2.0",
