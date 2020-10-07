@@ -4,8 +4,7 @@ import json
 import tuning_metrics.space
 
 
-def load_kernel_tuner(filename: str, key: str, ascending_metric: bool, name: str, transform: Callable) \
-        -> tuning_metrics.space.PerformanceSpace:
+def load_kernel_tuner(filename: str, key: str = "time", ascending_metric: bool = False, name: str = "", transform: Callable = None) -> tuning_metrics.space.PerformanceSpace:
     """
     Load JSON files produced by kernel_tuner.
 
@@ -17,14 +16,6 @@ def load_kernel_tuner(filename: str, key: str, ascending_metric: bool, name: str
     :return: A PerformanceSpace object containing the specified metric.
     """
 
-    if not key:
-        key = "time"
-    if not ascending_metric:
-        ascending_metric = False
-    if not name:
-        name = ""
-    if not transform:
-        transform = None
     with open(filename, "r") as file:
         configurations = json.load(file)
     performance_space = tuning_metrics.space.PerformanceSpace(ascending_metric=ascending_metric, name=name)
